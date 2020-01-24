@@ -3,6 +3,7 @@ const db = require('../data/db.js');
 module.exports = {
   addingResources,
   getResources,
+  addProject,
 }
 
 function addingResources(reqObject) {
@@ -13,11 +14,27 @@ function addingResources(reqObject) {
     });*/
 }
 
-function getResources() {
+function getResources(reqObject) {
   return db("resource");
 }
 
+function addProject(reqObject) {
+  return db("project").insert(reqObject)
+    .then(idOfAdded => {
+         return db("resLinkProject").insert({resourceID:idOfAdded[0],projectID:idOfAdded[0]});
+     });
+}
+
 /*
-retrieving a list of resources.
+
+adding projects.
+
+when adding projects the client must provide
+  a name,
+  the description is optional
+
+  also need the IDs
+
+
 
 */
