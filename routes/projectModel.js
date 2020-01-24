@@ -2,6 +2,7 @@ const db = require('../data/db.js');
 
 module.exports = {
   addingResources,
+  getResources,
 }
 
 function addingResources(reqObject) {
@@ -12,10 +13,11 @@ function addingResources(reqObject) {
     });*/
 }
 
+function getResources() {
+  return db("resource");
+}
+
 /*
-adding resources.
-
-when adding resources the client must provide a name, the description is optional.
-
+retrieving a list of resources.
 
 */
