@@ -69,4 +69,17 @@ router.post('/addtask', (request, responce) => {
     })
 });
 
+router.get('/taskList', (request, responce) => {
+  //db("cars").insert(request.body)
+  ProjectModel.listOFTasks()
+    .then(mvptasklist => {
+      //console.log(resources);
+      responce.json(mvptasklist);
+    })
+    .catch( error => {
+      console.log(error);
+      responce.status(500).json( {error: "Get Failed."} )
+    })
+});
+
 module.exports = router;

@@ -6,6 +6,7 @@ module.exports = {
   addProject,
   getProjects,
   addTasks,
+  listOFTasks,
 }
 
 function addingResources(reqObject) {
@@ -38,7 +39,28 @@ function addTasks(reqObject) {
      });
 }
 
+function listOFTasks() {
+  return db("taskLinkProject")
+  .join("task", "taskLinkProject.taskID", "task.id" )
+  .join("project", "taskLinkProject.projectID", "project.id" )
+  .select(
+    "task.task",
+    "task.taskDescription",
+    "project.name",
+    "project.projectDescription"
+  );
+}
+
 /*
+
+
+
+retrieving a list of tasks.
+The list of tasks should include
+  the project name
+  and project description.
+  AND THE TASK
+
 
 adding tasks.
 
