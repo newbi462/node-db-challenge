@@ -4,6 +4,7 @@ module.exports = {
   addingResources,
   getResources,
   addProject,
+  getProjects,
 }
 
 function addingResources(reqObject) {
@@ -25,7 +26,19 @@ function addProject(reqObject) {
      });
 }
 
+function getProjects() {
+  return db("project");
+}
+
 /*
+
+
+retrieving a list of projects.
+
+
+
+
+
 
 adding projects.
 

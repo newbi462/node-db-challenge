@@ -43,4 +43,17 @@ router.post('/addproject', (request, responce) => {
     })
 });
 
+router.get('/projects', (request, responce) => {
+  //db("cars").insert(request.body)
+  ProjectModel.getProjects()
+    .then(projects => {
+      //console.log(resources);
+      responce.json(projects);
+    })
+    .catch( error => {
+      console.log(error);
+      responce.status(500).json( {error: "Get Failed."} )
+    })
+});
+
 module.exports = router;
