@@ -5,6 +5,7 @@ module.exports = {
   getResources,
   addProject,
   getProjects,
+  addTasks,
 }
 
 function addingResources(reqObject) {
@@ -30,10 +31,26 @@ function getProjects() {
   return db("project");
 }
 
+function addTasks(reqObject) {
+  return db("task").insert(reqObject)
+    .then(idOfAdded => {
+         return db("taskLinkProject").insert({taskID:idOfAdded[0],projectID:idOfAdded[0]});
+     });
+}
+
 /*
 
+adding tasks.
 
-retrieving a list of projects.
+when adding a task the client
+  must provide a description,
+  the notes are optional.
+  MINE ALSO NEEDS A TASK
+
+
+  task
+  ID	task	taskDescription
+
 
 
 

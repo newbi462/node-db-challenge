@@ -56,4 +56,17 @@ router.get('/projects', (request, responce) => {
     })
 });
 
+router.post('/addtask', (request, responce) => {
+  //db("cars").insert(request.body)
+  ProjectModel.addTasks(request.body)
+    .then(addedlinkID => {
+      //console.log(addedID);
+      responce.json(addedlinkID);
+    })
+    .catch( error => {
+      console.log(error);
+      responce.status(500).json( {error: "Post Failed."} )
+    })
+});
+
 module.exports = router;
